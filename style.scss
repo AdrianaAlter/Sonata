@@ -1,0 +1,182 @@
+body, main, ul, li, h1 {
+ margin: 0;
+ padding: 0;
+ border: 0;
+ outline: 0;
+ color: oldlace;
+ text-align: center;
+ text-decoration: inherit;
+ vertical-align: inherit;
+ box-sizing: inherit;
+ background: transparent;
+ font-family: 'Sansita One', cursive;
+
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+html {
+  background: oldlace;
+}
+
+.keyboard {
+  padding: 3%;
+  width: 82%;
+  height: 160px;
+  margin: 2% auto;
+  background: linear-gradient(#c0d3f7, #185bd3);
+  box-shadow: inset 3px 3px 2px #0e3377;
+  position: relative;
+}
+
+.octave {
+  width: 70%;
+  height: 46px;
+  top: 65%;
+  left: 20%;
+  position: absolute;
+}
+
+.label {
+  text-align: left;
+  margin: 1.5% 0;
+  bottom: -55%;
+  left: 20%;
+  font-size: 12px;
+  position: absolute;
+}
+
+.black .label {
+  top: -158%;
+  left: 12%
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  font-size: 42px;
+  padding: 1%;
+  text-shadow: 4px 4px 7px #BF7F00, -4px -4px 7px #BF7F00;
+}
+
+.key {
+  float: left;
+  display: block;
+  border-radius: 0 3px 3px 3px;
+  height: 100%;
+  width: 3%;
+  border: 2.33px outset #f9e2b7;
+  border-top: none;
+  position: relative;
+  background: #fdf5e6;
+  top: 0;
+  font-size: 16px;
+}
+
+.key:before {
+  border-top: 2.33px outset #f9e2b7;
+  border-left: 2.33px outset #f9e2b7;
+  border-right: 2.33px outset #f9e2b7;
+  border-bottom: none;
+  height: 142%;
+  border-radius: 3px 3px 0 3px;
+  top: -142%;
+  display: block;
+  width: 59%;
+  z-index: 0;
+  position: absolute;
+  background: #fdf5e6;
+  content: "";
+}
+
+.black:before {
+  display: block;
+  margin-right: 1%;
+  top: -113%;
+  height: 144%;
+  width: 44%;
+  border-right: 2.66px outset #000;
+  border-top: 1.66px outset #000;
+  border-left: 2.66px outset #333;
+  border-bottom: 1.66px outset #1a1a1a;
+  z-index: 2;
+  right: 6%;
+  background: #1a1a1a;
+}
+
+.C:before {
+  left: -9%;
+}
+
+.F:before {
+  left: -8%;
+}
+
+.D:before {
+  left: 12%;
+}
+
+.A:before {
+  left: 14%;
+}
+
+.B:before, .E:before {
+  right: -8%;
+}
+
+.G:before {
+  left: 5.5%;
+}
+
+.black {
+  background: transparent;
+  border: none;
+  display: block;
+  box-shadow: none;
+  margin: -14.66px;
+  top: 0%;
+}
+
+.C-sharp:before {
+  right: 20.5%;
+}
+
+.F-sharp:before {
+  right: 22%;
+}
+
+.D-sharp:before {
+  right: 1%;
+}
+
+.A-sharp:before {
+  right: -2%;
+}
+
+.G-sharp:before {
+  right: 8%;
+}
+
+.black-active:before {
+  border: 2.66px inset black;
+  box-shadow: inset 1px 1px 1px black;
+}
+
+.active {
+  border: 1.66px inset #f9e2b7;
+}
+
+.key:hover .label, .active .label, .black-active .label {
+  text-shadow: 3px 3px 8px #BF7F00, -3px -3px 8px #BF7F00;
+}
+
+.active:before {
+  border-left: 2.9px inset #f9e2b7;
+  border-right: 1.66px inset #f9e2b7;
+  border-top: 1.66px inset #f9e2b7;
+}
