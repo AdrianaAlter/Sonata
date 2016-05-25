@@ -48,6 +48,7 @@
 	var React = __webpack_require__(6);
 	var ReactDOM = __webpack_require__(42);
 	var Organ = __webpack_require__(172);
+	var Song = __webpack_require__(197);
 	var KeyListener = __webpack_require__(194);
 	
 	var Mapping = {
@@ -94,7 +95,12 @@
 	  displayName: 'App',
 	
 	  render: function () {
-	    return React.createElement(Organ, null);
+	    return React.createElement(
+	      'div',
+	      { className: 'wrapper group' },
+	      React.createElement(Organ, null),
+	      React.createElement(Song, null)
+	    );
 	  }
 	});
 	
@@ -20711,6 +20717,7 @@
 
 	var React = __webpack_require__(6);
 	var Key = __webpack_require__(173);
+	
 	var TONES = __webpack_require__(195);
 	
 	var Organ = React.createClass({
@@ -27455,6 +27462,87 @@
 	};
 	
 	module.exports = KeyActions;
+
+/***/ },
+/* 197 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(6);
+	var ReactDom = __webpack_require__(42);
+	
+	var SongMenu = __webpack_require__(198);
+	
+	var Song = React.createClass({
+	  displayName: 'Song',
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      { className: 'song group' },
+	      React.createElement(SongMenu, null)
+	    );
+	  }
+	});
+	
+	module.exports = Song;
+
+/***/ },
+/* 198 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(6);
+	var ReactDom = __webpack_require__(42);
+	var SongMenuTitle = __webpack_require__(199);
+	
+	var songs = {
+	  "Song 1": "]piipiuip]p",
+	  "Song 2": "song2text",
+	  "Song 3": "3txt",
+	  "Song 4": "4txt",
+	  "Song 5": "5txt"
+	};
+	
+	var SongMenu = React.createClass({
+	  displayName: 'SongMenu',
+	
+	
+	  render: function () {
+	    var titles = Object.keys(songs);
+	    var menuLis = titles.map(function (title) {
+	      return React.createElement(SongMenuTitle, { key: titles.indexOf(title), title: title, text: songs[title] });
+	    });
+	
+	    return React.createElement(
+	      'ul',
+	      { className: 'song-menu group' },
+	      menuLis
+	    );
+	  }
+	
+	});
+	
+	module.exports = SongMenu;
+
+/***/ },
+/* 199 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(6);
+	var ReactDom = __webpack_require__(42);
+	
+	var SongMenuTitle = React.createClass({
+	  displayName: 'SongMenuTitle',
+	
+	  render: function () {
+	    return React.createElement(
+	      'li',
+	      { className: 'song-title' },
+	      this.props.title
+	    );
+	  }
+	});
+	
+	module.exports = SongMenuTitle;
 
 /***/ }
 /******/ ]);

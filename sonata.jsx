@@ -2,6 +2,7 @@ var AppDispatcher = require('./dispatcher/Dispatcher');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Organ = require('./components/Organ.jsx');
+var Song = require('./components/song.jsx');
 var KeyListener = require('./util/KeyListener');
 
 var Mapping = {
@@ -47,8 +48,11 @@ var Mapping = {
 var App = React.createClass({
   render: function () {
     return(
-      <Organ />
-    );
+      <div className="wrapper group">
+        <Organ />
+        <Song />
+      </div>
+    )
   }
 });
 
