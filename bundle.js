@@ -27388,6 +27388,7 @@
 /***/ function(module, exports) {
 
 	var TONES = {
+	
 	  "C 4": 261.63,
 	  "C# 4": 277.18,
 	  "D 4": 293.66,
