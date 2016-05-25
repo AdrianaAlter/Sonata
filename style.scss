@@ -1,4 +1,4 @@
-body, main, ul, li, h1 {
+body, main, ul, li, h1, h2 {
  margin: 0;
  padding: 0;
  border: 0;
@@ -10,6 +10,7 @@ body, main, ul, li, h1 {
  box-sizing: inherit;
  background: transparent;
  font-family: 'Sansita One', cursive;
+ font-size: 14px;
 
 }
 
@@ -46,7 +47,6 @@ html {
   margin: 1.5% 0;
   bottom: -55%;
   left: 20%;
-  font-size: 12px;
   position: absolute;
 }
 
