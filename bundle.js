@@ -62,7 +62,7 @@
 	  188: "G 4",
 	  190: "G# 4",
 	  191: "A 4",
-	  16: "A# 4",
+	  106: "A# 4",
 	  35: "B 4",
 	  65: "C 5",
 	  83: "C# 5",
@@ -75,7 +75,7 @@
 	  76: "G# 5",
 	  186: "A 5",
 	  222: "A# 5",
-	  13: "B 5",
+	  192: "B 5",
 	  81: "C 6",
 	  87: "C# 6",
 	  69: "D 6",
@@ -88,7 +88,19 @@
 	  80: "A 6",
 	  219: "A# 6",
 	  221: "B 6",
-	  49: "C 7"
+	  49: "C 7",
+	  50: "C# 7",
+	  51: "D 7",
+	  52: "D# 7",
+	  53: "E 7",
+	  54: "F 7",
+	  55: "F# 7",
+	  56: "G 7",
+	  57: "G# 7",
+	  48: "A 7",
+	  189: "A# 7",
+	  187: "B 7",
+	  144: "C 8"
 	};
 	
 	var App = React.createClass({
@@ -27301,7 +27313,9 @@
 
 	var ACTIONS = {
 	  KEY_PRESS: "KEY_PRESS",
-	  KEY_RELEASE: "KEY_RELEASE"
+	  KEY_RELEASE: "KEY_RELEASE",
+	  ALL_SONGS: "ALL_SONGS",
+	  SINGLE_SONG: "SINGLE_SONG"
 	};
 	
 	module.exports = ACTIONS;
@@ -27353,26 +27367,9 @@
 	var TONES = __webpack_require__(195);
 	var KeyActions = __webpack_require__(196);
 	
-	// var Mapping = {
-	//   65: "C5",
-	//   87: "C#",
-	//   83: "D",
-	//   69: "D#",
-	//   68: "E",
-	//   70: "F",
-	//   84: "F#",
-	//   71: "G",
-	//   89: "G#",
-	//   72: "A",
-	//   85: "A#",
-	//   74: "B",
-	//   75: "C6"
-	// };
-	
 	var KeyListener = {
 	
 	  pressKey: function (pressedKey) {
-	    // debugger
 	    KeyActions.keyPressed(pressedKey);
 	  },
 	
@@ -27395,7 +27392,18 @@
 /***/ function(module, exports) {
 
 	var TONES = {
-	
+	  "C 3": 130.81,
+	  "C# 3": 138.59,
+	  "D 3": 146.83,
+	  "D# 3": 155.56,
+	  "E 3": 164.81,
+	  "F 3": 174.61,
+	  "F# 3": 185.00,
+	  "G 3": 196.00,
+	  "G# 3": 207.65,
+	  "A 3": 220.00,
+	  "A# 3": 233.08,
+	  "B 3": 246.94,
 	  "C 4": 261.63,
 	  "C# 4": 277.18,
 	  "D 4": 293.66,
@@ -27432,7 +27440,19 @@
 	  "A 6": 1760.00,
 	  "A# 6": 1864.66,
 	  "B 6": 1975.53,
-	  "C 7": 2093.00
+	  "C 7": 2093.00,
+	  "C# 7": 2217.46,
+	  "D 7": 2349.32,
+	  "D# 7": 2489.02,
+	  "E 7": 2637.02,
+	  "F 7": 2793.83,
+	  "F# 7": 2959.96,
+	  "G 7": 3135.96,
+	  "G# 7": 3322.44,
+	  "A 7": 3520.00,
+	  "A# 7": 3729.31,
+	  "B 7": 3951.07,
+	  "C 8": 4186.01
 	};
 	
 	module.exports = TONES;
@@ -27469,17 +27489,45 @@
 
 	var React = __webpack_require__(6);
 	var ReactDom = __webpack_require__(42);
-	
 	var SongMenu = __webpack_require__(198);
+	var SongText = __webpack_require__(200);
+	var SongUtil = __webpack_require__(202);
+	var SongStore = __webpack_require__(201);
 	
 	var Song = React.createClass({
 	  displayName: 'Song',
 	
+	  getInitialState: function () {
+	    return { titles: [], selected: "", text: "" };
+	  },
+	
+	  componentDidMount: function () {
+	    var songs = SongUtil.fetchAllSongs();
+	    this.listener = SongStore.addListener(this.getSongs);
+	    this.setState({ titles: SongStore.titles() });
+	  },
+	
+	  componentWillUnmount: function () {
+	    this.listener.remove();
+	  },
+	
+	  clicked: function (e) {
+	    var title = e.currentTarget.textContent;
+	    this.setState({ selected: title });
+	    this.setState({ text: SongStore.lookUp(title) });
+	  },
+	
+	  getSongs: function () {
+	    this.setState({ titles: SongStore.titles() });
+	  },
+	
 	  render: function () {
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'song group' },
-	      React.createElement(SongMenu, null)
+	      React.createElement(SongMenu, { titles: this.state.titles, clicked: this.clicked, selected: this.state.selected }),
+	      React.createElement(SongText, { text: this.state.text })
 	    );
 	  }
 	});
@@ -27493,28 +27541,32 @@
 	var React = __webpack_require__(6);
 	var ReactDom = __webpack_require__(42);
 	var SongMenuTitle = __webpack_require__(199);
-	
-	var songs = {
-	  "Song 1": "]piipiuip]p",
-	  "Song 2": "song2text",
-	  "Song 3": "3txt",
-	  "Song 4": "4txt",
-	  "Song 5": "5txt"
-	};
+	var SongStore = __webpack_require__(201);
 	
 	var SongMenu = React.createClass({
 	  displayName: 'SongMenu',
 	
 	
+	  getInitialState: function () {
+	    return { selected: "" };
+	  },
+	
 	  render: function () {
-	    var titles = Object.keys(songs);
+	
+	    if (!this.props.titles) {
+	      return React.createElement('div', null);
+	    };
+	
+	    var titles = this.props.titles;
+	    var self = this;
+	
 	    var menuLis = titles.map(function (title) {
-	      return React.createElement(SongMenuTitle, { key: titles.indexOf(title), title: title, text: songs[title] });
+	      return React.createElement(SongMenuTitle, { key: titles.indexOf(title), title: title, clicked: self.props.clicked, selected: self.props.selected });
 	    });
 	
 	    return React.createElement(
 	      'ul',
-	      { className: 'song-menu group' },
+	      { className: "song-menu group" },
 	      menuLis
 	    );
 	  }
@@ -27533,16 +27585,150 @@
 	var SongMenuTitle = React.createClass({
 	  displayName: 'SongMenuTitle',
 	
+	
 	  render: function () {
+	    var className = this.props.selected == this.props.title ? "song-title active-title" : "song-title";
 	    return React.createElement(
 	      'li',
-	      { className: 'song-title' },
+	      { className: className, text: this.props.text, onClick: this.props.clicked },
 	      this.props.title
+	    );
+	  }
+	
+	});
+	
+	module.exports = SongMenuTitle;
+
+/***/ },
+/* 200 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(6);
+	var ReactDom = __webpack_require__(42);
+	
+	var SongText = React.createClass({
+	  displayName: 'SongText',
+	
+	  render: function () {
+	
+	    var sections = this.props.text.split(" ");
+	    var lines = sections.map(function (section) {
+	      return React.createElement(
+	        'p',
+	        { key: Math.random() },
+	        section
+	      );
+	    });
+	
+	    return React.createElement(
+	      'section',
+	      { className: 'song-text' },
+	      lines
 	    );
 	  }
 	});
 	
-	module.exports = SongMenuTitle;
+	module.exports = SongText;
+
+/***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var AppDispatcher = __webpack_require__(1);
+	var Store = __webpack_require__(175).Store;
+	var SongStore = new Store(AppDispatcher);
+	
+	var _songs = {};
+	
+	SongStore.populate = function (songs) {
+	  _songs = {};
+	  var titles = Object.keys(songs);
+	  for (var i = 0; i < titles.length; i++) {
+	    _songs[titles[i]] = songs[titles[i]];
+	  }
+	};
+	
+	SongStore.all = function () {
+	  return _songs;
+	};
+	
+	SongStore.titles = function () {
+	  return Object.keys(_songs);
+	};
+	
+	SongStore.lookUp = function (title) {
+	  return _songs[title];
+	};
+	
+	SongStore.__onDispatch = function (payload) {
+	  switch (payload.actionType) {
+	    case "ALL_SONGS":
+	      SongStore.populate(payload.songs);
+	      SongStore.__emitChange();
+	      break;
+	    case "SINGLE_SONG":
+	      SongStore.lookUp(payload.title);
+	      SongStore.__emitChange();
+	      break;
+	  }
+	};
+	
+	module.exports = SongStore;
+
+/***/ },
+/* 202 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var SongActions = __webpack_require__(203);
+	var songs = {
+	  "Song 1": "]piipiuip]p puee33]pi ]piuipiuip]p p33ppute",
+	  "Song 2": "gmdmadghdk gmdmadghdk ;qqqeq~;qqqeq",
+	  "Song 3": "kt kttkttytrti yteeweteewetq",
+	  "Song 4": "qeq;;;k;'; 'kq; hdka",
+	  "Song 5": "sjl;jlgj sjl;ljlgj s;'w';'j; jl;ljha*s/*"
+	};
+	
+	var SongUtil = {
+	
+	  fetchAllSongs: function () {
+	    SongActions.allSongs(songs);
+	  },
+	
+	  fetchSingleSong: function (title) {
+	    SongActions.singleSong(title);
+	  }
+	
+	};
+	
+	module.exports = SongUtil;
+	
+	// kkeq';k;'; 'kgkkj~g
+
+/***/ },
+/* 203 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var AppDispatcher = __webpack_require__(1);
+	
+	var SongActions = {
+	
+	  allSongs: function (songs) {
+	    AppDispatcher.dispatch({
+	      actionType: "ALL_SONGS",
+	      songs: songs
+	    });
+	  },
+	
+	  singleSong: function (title) {
+	    AppDispatcher.dispatch({
+	      actionType: "SINGLE_SONG",
+	      title: title
+	    });
+	  }
+	
+	};
+	
+	module.exports = SongActions;
 
 /***/ }
 /******/ ]);

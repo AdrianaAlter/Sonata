@@ -1,25 +1,27 @@
 var React = require('react');
 var ReactDom = require('react-dom');
 var SongMenuTitle = require('./song_menu_title.jsx');
-
-var songs = {
-  "Song 1": "]piipiuip]p",
-  "Song 2": "song2text",
-  "Song 3": "3txt",
-  "Song 4": "4txt",
-  "Song 5": "5txt"
-};
+var SongStore = require('../stores/song_store.js');
 
 var SongMenu = React.createClass({
 
+  getInitialState: function () {
+    return { selected: "" }
+  },
+
   render: function () {
-    var titles = Object.keys(songs);
+
+    if (!this.props.titles) { return <div></div> };
+      
+    var titles = this.props.titles;
+    var self = this;
+
     var menuLis = titles.map(function (title) {
-      return <SongMenuTitle key={titles.indexOf(title)}	title={title} text={songs[title]} />
+      return <SongMenuTitle key={titles.indexOf(title)}	title={title} clicked={self.props.clicked} selected={self.props.selected} />
     });
 
     return (
-      <ul className="song-menu group">{menuLis}</ul>
+      <ul className={"song-menu group"}>{menuLis}</ul>
     )
   }
 
