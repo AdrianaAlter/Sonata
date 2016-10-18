@@ -27490,9 +27490,9 @@
 	var React = __webpack_require__(6);
 	var ReactDom = __webpack_require__(42);
 	var SongMenu = __webpack_require__(198);
-	var SongText = __webpack_require__(200);
+	var SongText = __webpack_require__(201);
 	var SongUtil = __webpack_require__(202);
-	var SongStore = __webpack_require__(201);
+	var SongStore = __webpack_require__(200);
 	
 	var Song = React.createClass({
 	  displayName: 'Song',
@@ -27541,7 +27541,7 @@
 	var React = __webpack_require__(6);
 	var ReactDom = __webpack_require__(42);
 	var SongMenuTitle = __webpack_require__(199);
-	var SongStore = __webpack_require__(201);
+	var SongStore = __webpack_require__(200);
 	
 	var SongMenu = React.createClass({
 	  displayName: 'SongMenu',
@@ -27603,37 +27603,6 @@
 /* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(6);
-	var ReactDom = __webpack_require__(42);
-	
-	var SongText = React.createClass({
-	  displayName: 'SongText',
-	
-	  render: function () {
-	
-	    var sections = this.props.text.split(" ");
-	    var lines = sections.map(function (section) {
-	      return React.createElement(
-	        'p',
-	        { key: Math.random() },
-	        section
-	      );
-	    });
-	
-	    return React.createElement(
-	      'section',
-	      { className: 'song-text' },
-	      lines
-	    );
-	  }
-	});
-	
-	module.exports = SongText;
-
-/***/ },
-/* 201 */
-/***/ function(module, exports, __webpack_require__) {
-
 	var AppDispatcher = __webpack_require__(1);
 	var Store = __webpack_require__(175).Store;
 	var SongStore = new Store(AppDispatcher);
@@ -27676,16 +27645,47 @@
 	module.exports = SongStore;
 
 /***/ },
+/* 201 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(6);
+	var ReactDom = __webpack_require__(42);
+	
+	var SongText = React.createClass({
+	  displayName: 'SongText',
+	
+	  render: function () {
+	
+	    var sections = this.props.text.split(" ");
+	    var lines = sections.map(function (section) {
+	      return React.createElement(
+	        'p',
+	        { key: Math.random() },
+	        section
+	      );
+	    });
+	
+	    return React.createElement(
+	      'section',
+	      { className: 'song-text' },
+	      lines
+	    );
+	  }
+	});
+	
+	module.exports = SongText;
+
+/***/ },
 /* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var SongActions = __webpack_require__(203);
 	var songs = {
-	  "Song 1": "]piipiuip]p puee33]pi ]piuipiuip]p p33ppute",
-	  "Song 2": "gmdmadghdk gmdmadghdk ;qqqeq~;qqqeq",
-	  "Song 3": "kt kttkttytrti yteeweteewetq",
-	  "Song 4": "qeq;;;k;'; 'kq; hdka",
-	  "Song 5": "sjl;jlgj sjl;ljlgj s;'w';'j; jl;ljha*s/*"
+	  "Happy Birthday": "ddgdkj ddgd;k dde`kjg qq`k;k",
+	  "Für Elise": "trtrt`eq; ag;` gl`q gtrtrt`eq; ag;` gq`;",
+	  "Bach Minuet": "k`ei;uikk k`ei;uikk tttieeeiqeq`q;",
+	  "Ode to Joy": "gghkkhgdaadggdd gghkkhgdaadgdaa ddgadghgadghgdad, gghkkhgdaadgdaa",
+	  "Lullaby": "ggkggkgkq`;;k dghddgh dh`;k`q aaq;hkgahk;k aaq;hkgahgda"
 	};
 	
 	var SongUtil = {
@@ -27701,8 +27701,6 @@
 	};
 	
 	module.exports = SongUtil;
-	
-	// kkeq';k;'; 'kgkkj~g
 
 /***/ },
 /* 203 */

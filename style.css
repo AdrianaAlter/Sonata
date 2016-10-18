@@ -101,7 +101,7 @@ h1 {
 .black:before {
   display: block;
   top: -113%;
-  height: 144%;
+  height: 150%;
   width: 44%;
   border-right: 2.66px outset #000;
   border-top: 1.66px outset #000;
@@ -185,7 +185,7 @@ h1 {
 }
 
 .song {
-  padding: 0%;
+  padding: 4px 0;
   width: 94%;
 }
 
@@ -224,11 +224,10 @@ h1 {
 
 .song-text > p {
   letter-spacing: 6px;
-  line-height: 150%;
   text-align: center;
   width: 66%;
   text-transform: uppercase;
   font-style: normal;
-  font-size: 24px;
+  font-size: 22px;
   color: #1a1a1a;
 }

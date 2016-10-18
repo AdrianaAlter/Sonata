@@ -1,10 +1,10 @@
 var SongActions = require('../actions/song_actions.js');
 var songs = {
-  "Song 1": "]piipiuip]p puee33]pi ]piuipiuip]p p33ppute",
-  "Song 2": "gmdmadghdk gmdmadghdk ;qqqeq~;qqqeq",
-  "Song 3": "kt kttkttytrti yteeweteewetq",
-  "Song 4": "qeq;;;k;'; 'kq; hdka",
-  "Song 5": "sjl;jlgj sjl;ljlgj s;'w';'j; jl;ljha*s/*"
+  "Happy Birthday": "ddgdkj ddgd;k dde`kjg qq`k;k",
+  "Für Elise": "trtrt`eq; ag;` gl`q gtrtrt`eq; ag;` gq`;",
+  "Bach Minuet": "k`ei;uikk k`ei;uikk tttieeeiqeq`q;",
+  "Ode to Joy": "gghkkhgdaadggdd gghkkhgdaadgdaa ddgadghgadghgdad, gghkkhgdaadgdaa",
+  "Lullaby": "ggkggkgkq`;;k dghddgh dh`;k`q aaq;hkgahk;k aaq;hkgahgda"
 };
 
 var SongUtil = {
@@ -24,5 +24,3 @@ var SongUtil = {
 
 
 module.exports = SongUtil;
-
-// kkeq';k;'; 'kgkkj~g
