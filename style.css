@@ -7,7 +7,7 @@ body, main, ul, li, h1, h2, p {
  text-align: center;
  text-decoration: inherit;
  vertical-align: inherit;
- box-sizing: inherit;
+ box-sizing: border-box;
  background: transparent;
  font-family: 'Sansita One', cursive;
  font-size: 14px;
@@ -21,17 +21,17 @@ body, main, ul, li, h1, h2, p {
 
 html {
   width: 100%;
-  height: 1200px;
+  height: 100vh;
   background-image: url("./wallpaper.jpg");
 }
 
-body, #main, .wrapper {
+#main, .wrapper {
   height: 100%;
 }
 .keyboard, .song {
   padding: 4% 1%;
   width: 92%;
-  height: 15%;
+  height: 33vh;
   margin: 2% auto;
   background: linear-gradient(#bfd3df, #7BA3BD, #46708c);
   box-shadow: inset 3px 3px 2px #223c46;
@@ -59,12 +59,13 @@ body, #main, .wrapper {
 }
 
 h1 {
-  position: absolute;
-  top: 0;
-  left: 40%;
-  font-size: 42px;
+  display: block;
+  margin-left: -6%;
+  margin-top: -4%;
+  font-size: 60px;
   padding: 1%;
   text-shadow: 4px 4px 7px #BF7F00, -4px -4px 7px #BF7F00;
+  font-family: 'Niconne', cursive;
 }
 
 .key {
@@ -73,7 +74,7 @@ h1 {
   display: block;
   border-radius: 0 3% 3% 3%;
   height: 100%;
-  width: 2.4%;
+  width: 2.7%;
   border: 2.33px outset #f9e2b7;
   border-top: none;
   position: relative;
@@ -87,7 +88,7 @@ h1 {
   border-left: 2.33px outset #f9e2b7;
   border-right: 2.33px outset #f9e2b7;
   border-bottom: none;
-  height: 142%;
+  height: 140%;
   border-radius: 3% 3% 0 3%;
   top: -142%;
   display: block;
@@ -100,24 +101,32 @@ h1 {
 
 .black:before {
   display: block;
-  top: -113%;
-  height: 150%;
-  width: 44%;
+  top: -108%;
+  height: 140%;
+  width: 50%;
   border-right: 2.66px outset #000;
   border-top: 1.66px outset #000;
   border-left: 2.66px outset #333;
   border-bottom: 1.66px outset #1a1a1a;
   z-index: 2;
-  right: 6%;
   background: #1a1a1a;
 }
 
-.C:before {
-  left: -9%;
+.C, .C:before, .F, .F:before {
+  border-left: none;
+}
+.C:before, .F:before {
+  left: 0%;
+  width: 60%;
 }
 
-.F:before {
-  left: -8%;
+.B, .D {
+  width: 2.8%;
+}
+
+.B:before, .E:before {
+  width: 62%;
+  right: -7%;
 }
 
 .D:before {
@@ -126,10 +135,6 @@ h1 {
 
 .A:before {
   left: 14%;
-}
-
-.B:before, .E:before {
-  right: -7%;
 }
 
 .G:before {
@@ -145,24 +150,16 @@ h1 {
   top: 0%;
 }
 
-.C-sharp:before {
-  right: 22.5%;
-}
-
-.F-sharp:before {
-  right: 22%;
-}
-
-.D-sharp:before {
-  right: 1%;
+.C-sharp:before, .F-sharp:before {
+  right: 24%;
 }
 
 .A-sharp:before {
-  right: -2%;
+  right: 1.5%;
 }
 
-.G-sharp:before {
-  right: 8%;
+.G-sharp:before, .D-sharp:before {
+  right: 12%;
 }
 
 .black-active:before {
@@ -192,7 +189,7 @@ h1 {
 .song-menu {
   list-style: none;
   text-align: left;
-  height: 75%;
+  height: 100%;
   width: 14%;
   padding: 2%;
   float: left;
@@ -201,11 +198,15 @@ h1 {
 }
 
 .song-title {
-  height: 10%;
+  height: 20%;
   text-align: left;
   padding: 5% 0 2% 0;
   border-bottom: 1px solid oldlace;
   cursor: pointer;
+}
+
+.song-title:hover {
+  text-shadow: 3px 3px 8px #BF7F00, -3px -3px 8px #BF7F00;
 }
 
 .active-title {
@@ -219,7 +220,7 @@ h1 {
   padding: 2%;
   float: right;
   display: block;
-  overflow-y: scroll;
+  overflow-y: hidden;
 }
 
 .song-text > p {
